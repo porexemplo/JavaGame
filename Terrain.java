@@ -29,20 +29,18 @@ public class Terrain {
             this.carte = new Case[hauteur][largeur];
             for (int l=0; l<hauteur; l++) {
                 String line = sc.nextLine();
-                for (int c=0; c<largeur; c++) {
+                for (int c=0; c < largeur; c++) {
                     Case cc;
                     Character ch = line.charAt(c);
                     cc = switch (ch) {
                         case '#' -> new CaseIntraversable(l, c);
                         case ' ' -> new CaseLibre(l, c);
                         case 'o' -> new Sortie(l, c);
-                        case '@': cc = new CaseLibre(l, c, new Obstacle()); break;
-                        case '^': case '>': case 'v': case '<':
-                            cc = new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
-                            break;
-                        case 'm': case '»': case 'w': case '«':
-                            cc = new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
-                            break;
+                        case '@' -> new CaseLibre(l, c, new Obstacle());
+                        case '^', '>', 'v', '<' ->
+                            new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
+                        case 'm', '»', 'w', '«' ->
+                            new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
                         default -> null;
                     };
                     carte[l][c] = cc;
@@ -54,8 +52,10 @@ public class Terrain {
     }
 
     public void print() {
-        for (Case[] cases : carte)
+        for (Case[] cases : carte) {
             for (Case c : cases)
-                System.out.println(c);
+                System.out.print(c.toString());
+            System.out.println();
+        }
     }
 }

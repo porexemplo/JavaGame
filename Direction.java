@@ -9,13 +9,13 @@ public enum Direction {
 
     /* Lie le symbole représentant une créature et sa direction */
     public static Direction ofChar(Character d) {
-        switch (d) {
-            case '^': case 'm': return Direction.nord;
-            case 'v': case 'w': return Direction.sud;
-            case '>': case '»': return Direction.est;
-            case '<': case '«': return Direction.ouest;
-        }
-        return null;
+        return switch (d) {
+            case '^', 'm' -> Direction.nord;
+            case 'v', 'w' -> Direction.sud;
+            case '>', '»' -> Direction.est;
+            case '<', '«' -> Direction.ouest;
+            default -> null;
+        };
     }
 
     /* Tirage d'une direction aléatoire */
