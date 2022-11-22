@@ -1,9 +1,11 @@
 import java.util.ArrayList;
 import java.util.Random;
+import java.lang.Thread.sleep;
 
 public class Jeu {
     Terrain terrain;
     int sortis;
+    static boolean isFinnished = true;
 
     /* Initialisation d'un jeu avec le terrain initial décrit dans
        le fichier [f] donné en paramètre */
@@ -19,7 +21,9 @@ public class Jeu {
             for (Case c : cases) {
                 if (c instanceof CaseTraversable && ! c.estLibre()) {
                     if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
+                    if (((CaseTraversable)c).getContenu() instanceof Personnage) isFinnished = false;
                     entityCases.add(((CaseTraversable) c));
+                    
                 }
             }
         }
@@ -31,6 +35,10 @@ public class Jeu {
 
     public static void main(String[] args) {
         Jeu j = new Jeu("laby1.txt");
-        j.terrain.print();
+        while(!isFinnished){
+            j.tour();
+        
+            j.terrain.print();
+        }
     }
 }
