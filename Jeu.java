@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Jeu {
     Terrain terrain;
     int sortis;
@@ -9,8 +12,21 @@ public class Jeu {
         this.sortis = 0;
     }
 
-    public void tour() {
-        // TODO: Implement void tour()
+    public void tour(int hauteur,int largeur) {
+        Random random = new Random();
+        ArrayList<Case> entityCases = new ArrayList<>();
+        for (Case[] cases : terrain.getCarte()) {
+            for (Case c : cases) {
+                if (c instanceof CaseTraversable && ! c.estLibre()) {
+                    if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
+                    entityCases.add(c);
+                }
+            }
+        }
+        int rand = random.nextInt(entityCases.size());
+
+
+        
     }
 
     public static void main(String[] args) {

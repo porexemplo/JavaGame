@@ -20,6 +20,9 @@ public class Terrain {
          '^', 'v', '>', '<' pour une case libre contenant un personnage
          'm', 'w', '»', '«' pour une case libre contenant un monstre
     */
+    public Case[][] getCarte(){
+        return carte;
+    }
     public Terrain(String file) {
         try {
             Scanner sc = new Scanner(new FileInputStream(file));
