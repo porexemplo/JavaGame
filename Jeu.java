@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Random;
-import java.lang.Thread.sleep;
 
 public class Jeu {
     Terrain terrain;
@@ -33,12 +32,13 @@ public class Jeu {
                 terrain.getNextCase(entityCases.get(i)));
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Jeu j = new Jeu("laby1.txt");
+        j.tour();
         while(!isFinnished){
-            j.tour();
-        
+            Thread.sleep(500);
             j.terrain.print();
+            j.tour();
         }
     }
 }
