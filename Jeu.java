@@ -12,21 +12,21 @@ public class Jeu {
         this.sortis = 0;
     }
 
-    public void tour(int hauteur,int largeur) {
+    public void tour() {
         Random random = new Random();
-        ArrayList<Case> entityCases = new ArrayList<>();
+        ArrayList<CaseTraversable> entityCases = new ArrayList<>();
         for (Case[] cases : terrain.getCarte()) {
             for (Case c : cases) {
                 if (c instanceof CaseTraversable && ! c.estLibre()) {
                     if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
-                    entityCases.add(c);
+                    entityCases.add(((CaseTraversable) c));
                 }
             }
         }
-        int rand = random.nextInt(entityCases.size());
+        int i = random.nextInt(entityCases.size());
 
-
-        
+        ((EntiteMobile) entityCases.get(i).getContenu()).action(entityCases.get(i),
+                terrain.getNextCase(entityCases.get(i)));
     }
 
     public static void main(String[] args) {

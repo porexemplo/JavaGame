@@ -23,6 +23,16 @@ public class Terrain {
     public Case[][] getCarte(){
         return carte;
     }
+
+    public Case getNextCase(CaseTraversable c) {
+        Direction dir = ((EntiteMobile) c.getContenu()).dir;
+        return switch (dir) {
+            case nord -> carte[c.lig + 1][c.col];
+            case ouest -> carte[c.lig][c.col - 1];
+            case est -> carte[c.lig][c.col + 1];
+            case sud -> carte[c.lig - 1][c.col];
+        };
+    }
     public Terrain(String file) {
         try {
             Scanner sc = new Scanner(new FileInputStream(file));
