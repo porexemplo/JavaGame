@@ -10,11 +10,11 @@ public class Monstre extends EntiteMobile {
         }
         if (cible instanceof CaseTraversable) {
             if (
-                    ((CaseTraversable) cible).contenu instanceof Personnage ||
-                    ((CaseTraversable) cible).contenu instanceof Obstacle
+                    ((CaseTraversable) cible).getContenu() instanceof Personnage ||
+                    ((CaseTraversable) cible).getContenu() instanceof Obstacle
             ) {
                 ((CaseTraversable) cible).contenu.resistance--;
-                if (((CaseTraversable) cible).contenu.resistance <= 0)
+                if (((CaseTraversable) cible).getContenu().resistance <= 0)
                     ((CaseTraversable) cible).vide();
             }
             return;

@@ -12,9 +12,9 @@ public class Personnage extends EntiteMobile {
             ((CaseTraversable) courante).vide(); return;
         }
         if (cible instanceof CaseTraversable) {
-            if (((CaseTraversable) cible).contenu instanceof Obstacle) {
-                ((CaseTraversable) cible).contenu.resistance--;
-                if (((CaseTraversable) cible).contenu.resistance <= 0)
+            if (((CaseTraversable) cible).getContenu() instanceof Obstacle) {
+                ((CaseTraversable) cible).getContenu().resistance--;
+                if (((CaseTraversable) cible).getContenu().resistance <= 0)
                     ((CaseTraversable) cible).vide();
                 return;
             }
