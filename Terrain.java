@@ -23,6 +23,9 @@ public class Terrain {
     public Case[][] getCarte(){
         return carte;
     }
+    public int getHauteur() { return hauteur; }
+
+    public int getLargeur() { return largeur; }
 
     public Case getNextCase(CaseTraversable c) {
         Direction dir = ((EntiteMobile) c.getContenu()).dir;
