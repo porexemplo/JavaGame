@@ -1,8 +1,6 @@
 public class Jeu {
-    // First edit
     Terrain terrain;
     int sortis;
-    //second edit
 
     /* Initialisation d'un jeu avec le terrain initial décrit dans
        le fichier [f] donné en paramètre */
