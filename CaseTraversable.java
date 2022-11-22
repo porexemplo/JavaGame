@@ -1,5 +1,5 @@
 public class CaseTraversable extends Case {
-    Entite contenu;
+    protected Entite contenu;
 
     @Override
     boolean estLibre() { return contenu == null; }
