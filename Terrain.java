@@ -54,9 +54,10 @@ public class Terrain {
                         case 'o' -> new Sortie(l, c);
                         case '@' -> new CaseLibre(l, c, new Obstacle());
                         case '^', '>', 'v', '<' ->
-                            new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
+                        new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
                         case 'm', '»', 'w', '«' ->
-                            new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
+                        new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
+                        case 'H' -> new CaseLibre(l, c, new Joueur());
                         default -> null;
                     };
                     carte[l][c] = cc;

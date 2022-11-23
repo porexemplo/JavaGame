@@ -28,6 +28,7 @@ public class FenetreJeu extends JPanel {
             g.drawLine(0, i*tailleCase , largeur*tailleCase, i*tailleCase);
         }
         */
+
         for (Case[] cases : this.terrain.getCarte()) {
             for (Case c : cases){
                 if (c instanceof CaseIntraversable){
@@ -57,6 +58,7 @@ public class FenetreJeu extends JPanel {
                     }
                 }
             }
+        
         }
             
 
