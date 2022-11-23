@@ -12,7 +12,7 @@ public class FenetreJeu extends JPanel {
         this.largeur = t.getLargeur();
         this.terrain = t;
 
-        setBackground(Color.GRAY);
+        setBackground(Color.white);
         setPreferredSize(new Dimension(largeur * tailleCase, hauteur * tailleCase));
 
         JFrame frame = new JFrame("Donjon");
@@ -22,10 +22,53 @@ public class FenetreJeu extends JPanel {
         frame.pack();
         frame.setVisible(true);
     }
+    public void draw(Graphics g){
+       /*  for (int i =0; i < hauteur*tailleCase; i++){
+            g.drawLine(i*tailleCase, 0 , i*tailleCase, largeur*tailleCase);
+            g.drawLine(0, i*tailleCase , largeur*tailleCase, i*tailleCase);
+        }
+        */
+        for (Case[] cases : this.terrain.getCarte()) {
+            for (Case c : cases){
+                if (c instanceof CaseIntraversable){
+                    g.setColor(Color.BLACK);
+                    g.fillRect(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+                }
+                if (c instanceof Sortie){
+                    g.setColor(Color.blue);
+                    g.fillRect(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+                }
+
+                if ( c instanceof CaseTraversable){
+                    if (((CaseTraversable)c).getContenu() instanceof Obstacle){
+                        g.setColor(Color.gray);
+                        g.fillOval(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+                        
+                    }
+                    if (((CaseTraversable)c).getContenu() instanceof Personnage){
+                        g.setColor(Color.green);
+                        g.fillOval(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+
+                    }
+                    if (((CaseTraversable)c).getContenu() instanceof Monstre){
+                        g.setColor(Color.red);
+                        g.fillOval(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+
+                    }
+                }
+            }
+        }
+            
+
+
+                    
+
+        
+    }
 
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        /* Ã€ complÃ©ter */
+        draw(g);
     }
 
     public void ecranFinal(int n) {
