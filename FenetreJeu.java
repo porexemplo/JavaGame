@@ -38,6 +38,8 @@ public class FenetreJeu extends JPanel {
                 if (c instanceof Sortie){
                     g.setColor(Color.blue);
                     g.fillRect(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+                    g.setColor(Color.white);
+                    g.fillOval(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
                 }
 
                 if ( c instanceof CaseTraversable){
@@ -45,15 +47,20 @@ public class FenetreJeu extends JPanel {
                         g.setColor(Color.gray);
                         g.fillOval(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
                         
+                        
                     }
                     if (((CaseTraversable)c).getContenu() instanceof Personnage){
                         g.setColor(Color.green);
                         g.fillOval(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+                        g.setColor(Color.black);
+                        g.fillOval(c.lig*tailleCase, c.col*tailleCase+(tailleCase/4),(tailleCase/3),(tailleCase/3));
 
                     }
                     if (((CaseTraversable)c).getContenu() instanceof Monstre){
                         g.setColor(Color.red);
                         g.fillOval(c.lig*tailleCase, c.col*tailleCase, tailleCase, tailleCase);
+                        g.setColor(Color.black);
+                        g.fillOval(c.lig*tailleCase, c.col*tailleCase+(tailleCase/4),(tailleCase/3),(tailleCase/3));
 
                     }
                 }
