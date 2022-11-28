@@ -1,11 +1,11 @@
 public class Joueur  extends Entite{
-    public Joueur() { resistance = 3; }
-    public Joueur(int r) { resistance = r; }
+    protected int lig,col;
+    protected Direction dir;
+    public Joueur(int l, int c) { resistance = 3; lig = l; col = c; }
+    public Joueur(int l, int c,int r) { resistance = r; lig = l; col = c;}
     @Override
     String toString(String background) {
         return "H";
     }
 
-    //still don't know what s his resistance
-    //if he s on sortie what to do 
 }

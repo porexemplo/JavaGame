@@ -20,6 +20,7 @@ public class Terrain {
          '^', 'v', '>', '<' pour une case libre contenant un personnage
          'm', 'w', '»', '«' pour une case libre contenant un monstre
     */
+    public Joueur Joueur ;
     public Case[][] getCarte(){
         return carte;
     }
@@ -35,7 +36,7 @@ public class Terrain {
             case est -> carte[c.lig][c.col + 1];
             case sud -> carte[c.lig - 1][c.col];
         };
-    }
+    } 
     public Terrain(String file) {
         try {
             Scanner sc = new Scanner(new FileInputStream(file));
@@ -49,15 +50,15 @@ public class Terrain {
                     Case cc;
                     Character ch = line.charAt(c);
                     cc = switch (ch) {
-                        case '#' -> new CaseIntraversable(l, c);
-                        case ' ' -> new CaseLibre(l, c);
-                        case 'o' -> new Sortie(l, c);
-                        case '@' -> new CaseLibre(l, c, new Obstacle());
+                        case '#' -> cc= new CaseIntraversable(l, c);
+                        case ' ' -> cc= new CaseLibre(l, c);
+                        case 'o' -> cc=new Sortie(l, c);
+                        case '@' -> cc= new CaseLibre(l, c, new Obstacle());
                         case '^', '>', 'v', '<' ->
                         new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
                         case 'm', '»', 'w', '«' ->
-                        new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
-                        case 'H' -> new CaseLibre(l, c, new Joueur());
+                        cc = new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
+                        case 'H' -> new CaseLibre(l, c, this.Joueur = new Joueur(l, c));                 
                         default -> null;
                     };
                     carte[l][c] = cc;

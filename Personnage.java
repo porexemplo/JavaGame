@@ -8,7 +8,7 @@ public class Personnage extends EntiteMobile {
             ((Sortie) courante).vide(); saved++; return;
         }
         if (cible.estLibre()) {
-            ((CaseTraversable) cible).entre(this);
+            ((CaseTraversable) cible).entre(this);//courante.contenu ?
             ((CaseTraversable) courante).vide(); return;
         }
         if (cible instanceof CaseTraversable) {

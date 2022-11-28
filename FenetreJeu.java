@@ -1,12 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FenetreJeu extends JPanel {
     private Terrain terrain;
     private int tailleCase = 24;
     private int hauteur, largeur;
     private JFrame frame;
-
+    //public Joueur j = new Joueur(this.terrain.Joueur.lig, this.terrain.Joueur.col);
     public FenetreJeu(Terrain t) {
         this.hauteur = t.getHauteur();
         this.largeur = t.getLargeur();
@@ -62,22 +64,25 @@ public class FenetreJeu extends JPanel {
                         g.setColor(Color.black);
                         g.fillOval(c.lig*tailleCase, c.col*tailleCase+(tailleCase/4),(tailleCase/3),(tailleCase/3));
 
-                    }
+                    }   
+                    
+                }
                 }
             }
         
         }
             
-
-
                     
+          public void drawJoueuer(Graphics g){
+            g.setColor(Color.pink);
+            g.fillOval(this.terrain.Joueur.lig*tailleCase, this.terrain.Joueur.col*tailleCase, tailleCase, tailleCase);
 
+          }
         
-    }
-
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
+        drawJoueuer(g);
     }
 
     public void ecranFinal(int n) {
@@ -89,4 +94,8 @@ public class FenetreJeu extends JPanel {
         frame.getContentPane().add(label);
         frame.repaint();
     }
+
+
+      
+ 
 }

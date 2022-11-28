@@ -20,6 +20,7 @@ public class Jeu {
             for (Case c : cases) {
                 if (c instanceof CaseTraversable && ! c.estLibre()) {
                     if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
+                    if (((CaseTraversable)c).getContenu() instanceof Joueur) continue;
                     if (((CaseTraversable)c).getContenu() instanceof Personnage) isFinished = false;
                     entityCases.add(((CaseTraversable) c));
                     
