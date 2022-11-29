@@ -11,6 +11,7 @@ public class Jeu {
     public Jeu(String f) {
         this.terrain = new Terrain(f);
         this.sortis = 0;
+        
     }
 
     public void tour() {
