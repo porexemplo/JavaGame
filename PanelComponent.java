@@ -56,9 +56,11 @@ public class PanelComponent extends JPanel {
         }
     }
 
+    public void setPlayerDirection(Direction dir) { terrain.Joueur.dir = dir; }
+
     public void drawJoueuer(Graphics g){
         g.setColor(Color.pink);
-        g.fillOval(this.terrain.Joueur.lig*tailleCase, this.terrain.Joueur.col*tailleCase, tailleCase, tailleCase);
+        g.fillOval(this.terrain.Joueur.col*tailleCase, this.terrain.Joueur.lig*tailleCase, tailleCase, tailleCase);
     }
 
     public void paintComponent(Graphics g) {
@@ -67,12 +69,12 @@ public class PanelComponent extends JPanel {
         drawJoueuer(g);
     }
 
-    public void move(){
+    public void movePlayer(){
         switch (terrain.Joueur.dir) {
-            case nord -> terrain.Joueur.lig = terrain.Joueur.lig - 24;
-            case sud -> terrain.Joueur.lig = terrain.Joueur.lig + 24;
-            case ouest -> terrain.Joueur.col = terrain.Joueur.col - 24;
-            case est -> terrain.Joueur.col = terrain.Joueur.col + 24;
+            case nord -> terrain.Joueur.lig = terrain.Joueur.lig - 1;
+            case sud -> terrain.Joueur.lig = terrain.Joueur.lig + 1;
+            case ouest -> terrain.Joueur.col = terrain.Joueur.col - 1;
+            case est -> terrain.Joueur.col = terrain.Joueur.col + 1;
         }
     }
 }

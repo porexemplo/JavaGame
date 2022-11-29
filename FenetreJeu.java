@@ -31,12 +31,25 @@ public class FenetreJeu<ActionEvent> extends JFrame implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-        System.out.println("Key Typed !");
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_UP -> {
+                panel.setPlayerDirection(Direction.nord); panel.movePlayer();
+            }
+            case KeyEvent.VK_DOWN -> {
+                panel.setPlayerDirection(Direction.sud); panel.movePlayer();
+            }
+            case KeyEvent.VK_LEFT -> {
+                panel.setPlayerDirection(Direction.ouest); panel.movePlayer();
+            }
+            case KeyEvent.VK_RIGHT -> {
+                panel.setPlayerDirection(Direction.est); panel.movePlayer();
+            }
+        }
+        panel.repaint();
     }
 
     @Override
