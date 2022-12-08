@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class PanelComponent extends JPanel {
     private final Terrain terrain;
-    private final int tailleCase = 40;
+    private final int tailleCase = 24;
 
     public PanelComponent(Terrain t) {
         int hauteur = t.getHauteur();
@@ -11,7 +11,7 @@ public class PanelComponent extends JPanel {
         this.terrain = t;
 
         setBackground(Color.white);
-        setPreferredSize(new Dimension(largeur * tailleCase, hauteur * tailleCase));
+        setPreferredSize(new Dimension(hauteur * tailleCase, largeur * tailleCase));
     }
 
     public void draw(Graphics g){
@@ -68,6 +68,15 @@ public class PanelComponent extends JPanel {
         draw(g);
         drawJoueuer(g);
     }
+    public void addMovement(){
+        movePlayer();
+        terrain.getCarte()[terrain.Joueur.lig][terrain.Joueur.col] = new CaseLibre(terrain.Joueur.lig, terrain.Joueur.col, terrain.Joueur);
+        int lig = terrain.Joueur.lig;
+        int col = terrain.Joueur.col;
+       /*  if (terrain.getCarte()[lig][col] instanceof CaseIntraversable){
+            
+    } */
+}
 
     public void movePlayer(){
         switch (terrain.Joueur.dir) {

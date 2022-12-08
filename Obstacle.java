@@ -1,6 +1,6 @@
 public class Obstacle extends Entite {
 
-    public Obstacle() { resistance = 3; }
+    public Obstacle() { resistance = 5; }
     public Obstacle(int r) { resistance = r; }
 
     @Override

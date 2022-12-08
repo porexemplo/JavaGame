@@ -15,23 +15,26 @@ public class Jeu {
     }
 
     public void tour() {
-        Random random = new Random();
         ArrayList<CaseTraversable> entityCases = new ArrayList<>();
         for (Case[] cases : terrain.getCarte()) {
             for (Case c : cases) {
                 if (c instanceof CaseTraversable && ! c.estLibre()) {
                     if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
                     if (((CaseTraversable)c).getContenu() instanceof Joueur) continue;
-                    if (((CaseTraversable)c).getContenu() instanceof Personnage) isFinished = false;
+                    if (((CaseTraversable)c).getContenu() instanceof Personnage) {isFinished = false;}
+                    /* entityCases.add(((CaseTraversable) c));System.out.println(((CaseTraversable)c).getContenu()); */
+                     if (((CaseTraversable)c).getContenu() instanceof EntiteMobile)
                     entityCases.add(((CaseTraversable) c));
                     
                 }
             }
         }
-        int i = random.nextInt(entityCases.size());
+        for (CaseTraversable e: entityCases){
+            if ((EntiteMobile) e.getContenu()== null) continue;
+            ((EntiteMobile) e.getContenu()).action(e,terrain.getNextCase(e));
 
-        ((EntiteMobile) entityCases.get(i).getContenu()).action(entityCases.get(i),
-                terrain.getNextCase(entityCases.get(i)));
+        }
+
     }
 
     public static void main(String[] args) throws InterruptedException {

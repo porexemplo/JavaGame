@@ -29,4 +29,14 @@ public enum Direction {
             default: return Direction.ouest;
         }
     }
+
+    public static Direction sensContraire (Direction dir){
+        switch (dir){
+            case nord : return sud;
+            case sud : return nord;
+            case est : return ouest;
+            case ouest : return est;
+            default: return ouest;
+        }
+    }
 }

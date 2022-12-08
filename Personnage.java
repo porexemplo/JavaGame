@@ -5,19 +5,36 @@ public class Personnage extends EntiteMobile {
     @Override
     public void action(Case courante, Case cible) {
         if (courante instanceof Sortie) {
-            ((Sortie) courante).vide(); saved++; return;
+            ((Sortie) courante).vide(); saved++;
         }
         if (cible.estLibre()) {
-            ((CaseTraversable) cible).entre(this);//courante.contenu ?
-            ((CaseTraversable) courante).vide(); return;
+            ((CaseTraversable) cible).entre(((CaseTraversable) courante).getContenu());//courante.contenu ?
+            ((CaseTraversable) courante).vide();
+            return;
         }
-        if (cible instanceof CaseTraversable) {
-            if (((CaseTraversable) cible).getContenu() instanceof Obstacle) {
+         if (cible instanceof CaseTraversable) {
+           /* if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
+                this.dir= Direction.sensContraire(dir);
+            } */
+            if (((CaseTraversable) cible).getContenu() instanceof Monstre) {
                 ((CaseTraversable) cible).getContenu().resistance--;
+                this.dir= Direction.sensContraire(dir);
+                if (((CaseTraversable) courante).getContenu().resistance <= 0){
+                    ((CaseTraversable) cible).vide(); 
+                return;
+            }
+        }
+
+            if (((CaseTraversable) cible).getContenu() instanceof Obstacle) {
+
+                ((CaseTraversable) cible).getContenu().resistance--;
+            
                 if (((CaseTraversable) cible).getContenu().resistance <= 0)
                     ((CaseTraversable) cible).vide();
                 return;
             }
+            
+        
         }
         this.dir = Direction.random();
     }
