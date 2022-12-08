@@ -57,7 +57,7 @@ public class Terrain {
                         case '^', '>', 'v', '<' ->
                         new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
                         case 'm', '»', 'w', '«' ->
-                        cc = new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
+                        new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
                         case 'H' -> new CaseLibre(l, c, this.Joueur = new Joueur(l, c));                 
                         default -> null;
                     };

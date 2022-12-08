@@ -1,4 +1,4 @@
-public class Joueur  extends Entite{
+public class Joueur  extends Entite {
     public int lig,col;
     public Direction dir;
     public Joueur(int l, int c) { resistance = 3; lig = l; col = c; }

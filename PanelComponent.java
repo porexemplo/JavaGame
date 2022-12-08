@@ -58,7 +58,7 @@ public class PanelComponent extends JPanel {
 
     public void setPlayerDirection(Direction dir) { terrain.Joueur.dir = dir; }
 
-    public void drawJoueuer(Graphics g){
+    public void drawJoueur(Graphics g){
         g.setColor(Color.pink);
         g.fillOval(this.terrain.Joueur.col*tailleCase, this.terrain.Joueur.lig*tailleCase, tailleCase, tailleCase);
     }
@@ -66,7 +66,7 @@ public class PanelComponent extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
-        drawJoueuer(g);
+        drawJoueur(g);
     }
     public void addMovement(){
         movePlayer();
