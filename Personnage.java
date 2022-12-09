@@ -24,7 +24,6 @@ public class Personnage extends EntiteMobile {
             }
         }
         if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
-            System.out.println("say hieiei");
             this.resistance--;
             this.dir= Direction.random();
             return;

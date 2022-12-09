@@ -23,7 +23,6 @@ public class Monstre extends EntiteMobile {
                 return;
             }
             if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
-                System.out.println("say hahahha");
                 this.resistance--;
                 this.dir= Direction.random();
                 return;

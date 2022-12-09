@@ -8,6 +8,8 @@ public class Terrain {
     private int hauteur, largeur;
     private Case[][] carte;
 
+    protected Joueur joueurPointer;
+
     /* Initialisation d'un terrain à partir de la description donnée par
        un fichier texte. Format du fichier de description :
        - hauteur et largeur sur la première ligne
@@ -20,7 +22,6 @@ public class Terrain {
          '^', 'v', '>', '<' pour une case libre contenant un personnage
          'm', 'w', '»', '«' pour une case libre contenant un monstre
     */
-    public CaseTraversable Joueur ;
     public Case[][] getCarte(){
         return carte;
     }
@@ -55,13 +56,13 @@ public class Terrain {
                         case 'o' -> cc=new Sortie(l, c);
                         case '@' -> cc= new CaseLibre(l, c, new Obstacle());
                         case '^', '>', 'v', '<' ->
-                        cc= new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
+                        cc = new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
                         case 'm', '»', 'w', '«' ->
                         cc = new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
-                        case 'H' ->{ this.Joueur = new CaseLibre(l, c, new Joueur());
-                            cc = this.Joueur;  
-                        }              
-                        
+                        case 'H' -> {
+                            joueurPointer = new Joueur();
+                            cc = new CaseLibre(l, c, joueurPointer);
+                        }
                     };
                     carte[l][c] = cc;
                 }

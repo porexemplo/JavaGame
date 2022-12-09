@@ -22,8 +22,7 @@ public class Jeu {
                     if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
                     if (((CaseTraversable)c).getContenu() instanceof Joueur) continue;
                     if (((CaseTraversable)c).getContenu() instanceof Personnage) {isFinished = false;}
-                    /* entityCases.add(((CaseTraversable) c));System.out.println(((CaseTraversable)c).getContenu()); */
-                     if (((CaseTraversable)c).getContenu() instanceof EntiteMobile)
+                    if (((CaseTraversable)c).getContenu() instanceof EntiteMobile)
                     entityCases.add(((CaseTraversable) c));
                     
                 }
