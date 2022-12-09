@@ -20,7 +20,7 @@ public class Terrain {
          '^', 'v', '>', '<' pour une case libre contenant un personnage
          'm', 'w', '»', '«' pour une case libre contenant un monstre
     */
-    public Joueur Joueur ;
+    public CaseTraversable Joueur ;
     public Case[][] getCarte(){
         return carte;
     }
@@ -40,26 +40,28 @@ public class Terrain {
     public Terrain(String file) {
         try {
             Scanner sc = new Scanner(new FileInputStream(file));
-            this.hauteur = sc.nextInt();
             this.largeur = sc.nextInt();
+            this.hauteur = sc.nextInt();
             sc.nextLine();
-            this.carte = new Case[hauteur][largeur];
-            for (int l=0; l<hauteur; l++) {
+            this.carte = new Case[largeur][hauteur];
+            for (int l=0; l<largeur; l++) {
                 String line = sc.nextLine();
-                for (int c=0; c < largeur; c++) {
-                    Case cc;
+                for (int c=0; c < hauteur; c++) {
+                    Case cc = null;
                     Character ch = line.charAt(c);
-                    cc = switch (ch) {
+                    switch (ch) {
                         case '#' -> cc= new CaseIntraversable(l, c);
                         case ' ' -> cc= new CaseLibre(l, c);
                         case 'o' -> cc=new Sortie(l, c);
                         case '@' -> cc= new CaseLibre(l, c, new Obstacle());
                         case '^', '>', 'v', '<' ->
-                        new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
+                        cc= new CaseLibre(l, c, new Personnage(Direction.ofChar(ch)));
                         case 'm', '»', 'w', '«' ->
-                        new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
-                        case 'H' -> new CaseLibre(l, c, this.Joueur = new Joueur(l, c));                 
-                        default -> null;
+                        cc = new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
+                        case 'H' ->{ this.Joueur = new CaseLibre(l, c, new Joueur());
+                            cc = this.Joueur;  
+                        }              
+                        
                     };
                     carte[l][c] = cc;
                 }
@@ -68,6 +70,7 @@ public class Terrain {
         }
         catch (IOException e) { e.printStackTrace(); }
     }
+   
 
     public void print() {
         for (Case[] cases : carte) {
