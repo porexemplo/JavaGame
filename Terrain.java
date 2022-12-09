@@ -8,7 +8,7 @@ public class Terrain {
     private int hauteur, largeur;
     private Case[][] carte;
 
-    protected Joueur joueurPointer;
+    protected CaseLibre current;
 
     /* Initialisation d'un terrain à partir de la description donnée par
        un fichier texte. Format du fichier de description :
@@ -30,12 +30,17 @@ public class Terrain {
     public int getLargeur() { return largeur; }
 
     public Case getNextCase(CaseTraversable c) {
-        Direction dir = ((EntiteMobile) c.getContenu()).dir;
+        Direction dir;
+        if (c.getContenu() instanceof EntiteMobile)
+            dir = ((EntiteMobile) c.getContenu()).dir;
+        else
+            dir = ((Joueur) c.getContenu()).dir;
+
         return switch (dir) {
-            case nord -> carte[c.lig + 1][c.col];
+            case nord -> carte[c.lig - 1][c.col];
             case ouest -> carte[c.lig][c.col - 1];
             case est -> carte[c.lig][c.col + 1];
-            case sud -> carte[c.lig - 1][c.col];
+            case sud -> carte[c.lig + 1][c.col];
         };
     } 
     public Terrain(String file) {
@@ -60,8 +65,8 @@ public class Terrain {
                         case 'm', '»', 'w', '«' ->
                         cc = new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
                         case 'H' -> {
-                            joueurPointer = new Joueur();
-                            cc = new CaseLibre(l, c, joueurPointer);
+                            cc = new CaseLibre(l, c, new Joueur());
+                            current = (CaseLibre) cc;
                         }
                     };
                     carte[l][c] = cc;

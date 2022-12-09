@@ -38,19 +38,21 @@ public class FenetreJeu<ActionEvent> extends JFrame implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP -> {
-
-//                 panel.movePlayer( Direction.nord);
+                ((Joueur) panel.terrain.current.getContenu()).setDirection(Direction.nord);
             }
             case KeyEvent.VK_DOWN -> {
-//                 panel.movePlayer(Direction.sud);
+                ((Joueur) panel.terrain.current.getContenu()).setDirection(Direction.sud);
             }
             case KeyEvent.VK_LEFT -> {
-//                 panel.movePlayer(Direction.ouest);
+                ((Joueur) panel.terrain.current.getContenu()).setDirection(Direction.ouest);
             }
             case KeyEvent.VK_RIGHT -> {
-//                 panel.movePlayer(Direction.est);
+                ((Joueur) panel.terrain.current.getContenu()).setDirection(Direction.est);
             }
         }
+        Case nextCase = panel.terrain.getNextCase(panel.terrain.current);
+        ((Joueur) panel.terrain.current.getContenu()).movePlayer(panel.terrain.current, nextCase);
+        if (panel.terrain.current.getContenu() == null) panel.terrain.current = (CaseLibre) nextCase;
         panel.repaint();
     }
 

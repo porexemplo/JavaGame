@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class PanelComponent extends JPanel {
-    private final Terrain terrain;
+    protected final Terrain terrain;
     private final int tailleCase = 24;
 
     public PanelComponent(Terrain t) {
@@ -59,13 +59,22 @@ public class PanelComponent extends JPanel {
     public void drawLittleEye(Graphics g, Case c, Direction dir) {
         switch (dir) {
             case est ->
-                    g.fillOval(c.col * tailleCase + ((tailleCase / 2) + 3), c.lig * tailleCase + ((tailleCase / 2) - 4), (tailleCase / 3), (tailleCase / 3));
+                    g.fillOval(c.col * tailleCase + ((tailleCase / 2) + 3),
+                            c.lig * tailleCase + ((tailleCase / 2) - 4),
+                            (tailleCase / 3), (tailleCase / 3));
             case ouest ->
-                    g.fillOval(c.col * tailleCase, c.lig * tailleCase + (tailleCase / 4), (tailleCase / 3), (tailleCase / 3));
-            case sud ->
-                    g.fillOval(c.col * tailleCase + (tailleCase / 4), c.lig * tailleCase, (tailleCase / 3), (tailleCase / 3));
+                    g.fillOval(c.col * tailleCase,
+                            c.lig * tailleCase + (tailleCase / 4),
+                            (tailleCase / 3), (tailleCase / 3));
             case nord ->
-                    g.fillOval(c.col * tailleCase + ((tailleCase / 3)), c.lig * tailleCase + ((tailleCase / 2) + 2), (tailleCase / 3), (tailleCase / 3));
+                    g.fillOval(c.col * tailleCase + (tailleCase / 4),
+                            c.lig * tailleCase,
+                            (tailleCase / 3), (tailleCase / 3));
+            case sud ->
+                    g.fillOval(c.col * tailleCase + ((tailleCase / 3)),
+                            c.lig * tailleCase + ((tailleCase / 2) + 2),
+                            (tailleCase / 3), (tailleCase / 3)
+                    );
         }
 
     }
