@@ -7,8 +7,8 @@ public class Terrain {
 
     private int hauteur, largeur;
     private Case[][] carte;
-
-    protected CaseLibre current;
+    static boolean isFinished = false;
+    protected CaseTraversable current;
 
     /* Initialisation d'un terrain à partir de la description donnée par
        un fichier texte. Format du fichier de description :
@@ -65,8 +65,8 @@ public class Terrain {
                         case 'm', '»', 'w', '«' ->
                         cc = new CaseLibre(l, c, new Monstre(Direction.ofChar(ch)));
                         case 'H' -> {
-                            cc = new CaseLibre(l, c, new Joueur());
-                            current = (CaseLibre) cc;
+                            cc = new CaseTraversable(l, c, new Joueur());
+                            current = (CaseTraversable) cc;
                         }
                     };
                     carte[l][c] = cc;

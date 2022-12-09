@@ -49,10 +49,14 @@ public class FenetreJeu<ActionEvent> extends JFrame implements KeyListener {
             case KeyEvent.VK_RIGHT -> {
                 ((Joueur) panel.terrain.current.getContenu()).setDirection(Direction.est);
             }
+            case KeyEvent.VK_SPACE -> {
+                if (panel.terrain.current instanceof Sortie) Terrain.isFinished = true;
+                return;
+            }
         }
         Case nextCase = panel.terrain.getNextCase(panel.terrain.current);
         ((Joueur) panel.terrain.current.getContenu()).movePlayer(panel.terrain.current, nextCase);
-        if (panel.terrain.current.getContenu() == null) panel.terrain.current = (CaseLibre) nextCase;
+        if (panel.terrain.current.getContenu() == null) panel.terrain.current = (CaseTraversable) nextCase;
         panel.repaint();
     }
 

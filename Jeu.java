@@ -4,7 +4,6 @@ import java.util.Random;
 public class Jeu {
     Terrain terrain;
     int sortis;
-    static boolean isFinished = true;
 
     /* Initialisation d'un jeu avec le terrain initial décrit dans
        le fichier [f] donné en paramètre */
@@ -21,7 +20,7 @@ public class Jeu {
                 if (c instanceof CaseTraversable && ! c.estLibre()) {
                     if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
                     if (((CaseTraversable)c).getContenu() instanceof Joueur) continue;
-                    if (((CaseTraversable)c).getContenu() instanceof Personnage) {isFinished = false;}
+                    if (((CaseTraversable)c).getContenu() instanceof Personnage) continue;
                     if (((CaseTraversable)c).getContenu() instanceof EntiteMobile)
                     entityCases.add(((CaseTraversable) c));
                     
@@ -39,7 +38,7 @@ public class Jeu {
     public static void main(String[] args) throws InterruptedException {
         Jeu j = new Jeu("laby1.txt");
         j.tour();
-        while(!isFinished){
+        while(!Terrain.isFinished){
             Thread.sleep(500);
             j.terrain.print();
             j.tour();

@@ -9,12 +9,12 @@ public class Joueur extends Entite{
 
     public void movePlayer(Case courante, Case cible) {
         System.out.println("CALLED MOVE PLAYER");
-        if (cible instanceof CaseLibre) {
-            if (((CaseLibre) cible).getContenu() instanceof Monstre)
-                ((CaseLibre) cible).getContenu().resistance--;
-            else if (((CaseLibre) cible).getContenu() instanceof Obstacle)
-                ((CaseLibre) cible).getContenu().resistance--;
-            else if (((CaseLibre) cible).getContenu() instanceof Personnage)
+        if (cible instanceof CaseTraversable) {
+            if (((CaseTraversable) cible).getContenu() instanceof Monstre)
+                ((CaseTraversable) cible).getContenu().resistance--;
+            else if (((CaseTraversable) cible).getContenu() instanceof Obstacle)
+                ((CaseTraversable) cible).getContenu().resistance--;
+            else if (((CaseTraversable) cible).getContenu() instanceof Personnage)
                 return;
             else {
                 ((CaseTraversable) cible).entre(((CaseTraversable) courante).getContenu());
