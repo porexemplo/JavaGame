@@ -1,6 +1,7 @@
 public class Personnage extends EntiteMobile {
     static int saved;
     public Personnage(Direction dir) { super(dir); saved = 0; }
+    public Direction getDirection(){ return this.dir;}
 
     @Override
     public void action(Case courante, Case cible) {
@@ -13,16 +14,20 @@ public class Personnage extends EntiteMobile {
             return;
         }
          if (cible instanceof CaseTraversable) {
-           /* if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
-                this.dir= Direction.sensContraire(dir);
-            } */
+           
             if (((CaseTraversable) cible).getContenu() instanceof Monstre) {
-                ((CaseTraversable) cible).getContenu().resistance--;
-                this.dir= Direction.sensContraire(dir);
+                this.resistance--;
+
                 if (((CaseTraversable) courante).getContenu().resistance <= 0){
-                    ((CaseTraversable) cible).vide(); 
+                    ((CaseTraversable) courante).vide(); 
                 return;
             }
+        }
+        if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
+            System.out.println("say hieiei");
+            this.resistance--;
+            this.dir= Direction.random();
+            return;
         }
 
             if (((CaseTraversable) cible).getContenu() instanceof Obstacle) {
