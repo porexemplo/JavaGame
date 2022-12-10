@@ -20,10 +20,8 @@ public class Jeu {
                 if (c instanceof CaseTraversable && ! c.estLibre()) {
                     if (((CaseTraversable)c).getContenu() instanceof Obstacle) continue;
                     if (((CaseTraversable)c).getContenu() instanceof Joueur) continue;
-                    if (((CaseTraversable)c).getContenu() instanceof Personnage) continue;
                     if (((CaseTraversable)c).getContenu() instanceof EntiteMobile)
-                    entityCases.add(((CaseTraversable) c));
-                    
+                        entityCases.add(((CaseTraversable) c));
                 }
             }
         }

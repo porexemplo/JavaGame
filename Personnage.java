@@ -9,7 +9,7 @@ public class Personnage extends EntiteMobile {
             ((Sortie) courante).vide(); saved++;
         }
         if (cible.estLibre()) {
-            ((CaseTraversable) cible).entre(((CaseTraversable) courante).getContenu());//courante.contenu ?
+            ((CaseTraversable) cible).entre(((CaseTraversable) courante).getContenu());
             ((CaseTraversable) courante).vide();
             return;
         }
