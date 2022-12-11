@@ -86,7 +86,6 @@ public class Generator {
         shuffleArray(indexArray);
         for (int i : indexArray) {
             if (neighbours.get(i).isVisited) {
-                System.out.println("VISITED NEIGHBOUR: " + neighbours.get(i).x + ", " + neighbours.get(i).y);
                 continue;
             }
             neighbours.get(i).visit(); visitedCells.add(neighbours.get(i)); currentPosition++; return true;
@@ -96,7 +95,6 @@ public class Generator {
 
     public void generateMap() {
         Cell currentCell = output.getRandomCell();
-        System.out.println("CURRENT CELL: " + currentCell.x + ", " + currentCell.y);
         currentCell.visit();
         for (int i = 0; i < (output.noise*output.size*output.size); i++) {
             while (! addNext(currentCell))
@@ -123,7 +121,6 @@ public class Generator {
         shuffleArray(indexArray);
         int gamerIndex = indexArray[0];
         int[] monsterIndexArray = Arrays.copyOfRange(indexArray, 1, 1+monsterCount);
-        System.out.println(Arrays.toString(monsterIndexArray));
         int[] personaIndexArray = Arrays.copyOfRange(indexArray, monsterCount+1, personaCount+monsterCount+1);
         int sortieIndex = indexArray[monsterCount+personaCount+1];
         visitedCells.get(gamerIndex).setContent(1);
