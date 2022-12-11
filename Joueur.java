@@ -1,6 +1,6 @@
 public class Joueur extends Entite{
     protected Direction dir;
-    public Joueur() { resistance = 50; dir = Direction.nord; }
+    public Joueur() { resistance = 5; dir = Direction.nord; }
 
     @Override
     String toString(String background) { return "H"; }
@@ -8,12 +8,22 @@ public class Joueur extends Entite{
     public void setDirection(Direction dir) { this.dir = dir; }
 
     public void movePlayer(Case courante, Case cible) {
-        System.out.println("CALLED MOVE PLAYER");
         if (cible instanceof CaseTraversable) {
-            if (((CaseTraversable) cible).getContenu() instanceof Monstre)
+            if (((CaseTraversable) cible).getContenu() instanceof Monstre){
+                this.resistance--;
                 ((CaseTraversable) cible).getContenu().resistance--;
-            else if (((CaseTraversable) cible).getContenu() instanceof Obstacle)
+                if (((CaseTraversable) cible).getContenu().resistance <= 0)
+                    ((CaseTraversable) cible).vide();
+            }
+
+            else if (((CaseTraversable) cible).getContenu() instanceof Obstacle){
+                this.resistance--;
                 ((CaseTraversable) cible).getContenu().resistance--;
+                if (((CaseTraversable) cible).getContenu().resistance <= 0)
+                    ((CaseTraversable) cible).vide();
+
+            }
+
             else if (((CaseTraversable) cible).getContenu() instanceof Personnage)
                 return;
             else {

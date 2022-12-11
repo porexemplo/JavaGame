@@ -18,18 +18,23 @@ public class Monstre extends EntiteMobile {
             if (((CaseTraversable) cible).getContenu() instanceof Personnage) {
                 this.dir = Direction.random();
                 ((CaseTraversable) cible).contenu.resistance--;
-                if (((CaseTraversable) cible).getContenu().resistance <= 0)
+                if (((CaseTraversable) cible).getContenu().resistance <= 0){
                     ((CaseTraversable) cible).vide();
+                }
                 return;
             }
             if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
                 this.resistance--;
-                this.dir= Direction.random();
+                if (((CaseTraversable) cible).getContenu().resistance <= 0){
+                    ((CaseTraversable) cible).vide();
+                    Terrain.isFinished = true;
+                }
+
                 return;
             }
 
             if (((CaseTraversable) cible).getContenu() instanceof Obstacle ){
-                ((CaseTraversable) cible).contenu.resistance--; this.resistance--;
+                ((CaseTraversable) cible).contenu.resistance--;
                 if (((CaseTraversable) cible).getContenu().resistance <= 0)
                     ((CaseTraversable) cible).vide();
             }
