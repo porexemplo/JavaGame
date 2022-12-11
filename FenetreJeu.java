@@ -36,6 +36,7 @@ public class FenetreJeu<ActionEvent> extends JFrame implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        if (Terrain.isFinished) return;
         switch (e.getKeyCode()) {
             case KeyEvent.VK_UP -> {
                 ((Joueur) panel.terrain.current.getContenu()).setDirection(Direction.nord);
