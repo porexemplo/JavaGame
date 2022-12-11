@@ -1,3 +1,6 @@
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -32,7 +35,7 @@ public class Generator {
             return getCell(x, y);
         }
 
-        public boolean isInside(int x, int y) { return x < size && y < size && x > 0 && y > 0; }
+        public boolean isInside(int x, int y) { return x < size && y < size && x >= 0 && y >= 0; }
 
         public ArrayList<Cell> getCellNeighboors(Cell cell) {
             int x = cell.x, y = cell.y;
@@ -48,6 +51,8 @@ public class Generator {
     private Map output;
     protected ArrayList<Cell> visitedCells;
     protected int currentPosition;
+    protected int personaCount, monsterCount;
+    PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
 
     static void shuffleArray(int[] intArray) {
         Random rnd = ThreadLocalRandom.current();
@@ -66,15 +71,18 @@ public class Generator {
 
         shuffleArray(indexArray);
         for (int i : indexArray) {
-            if (neighbours.get(i).isVisited) continue;
+            if (neighbours.get(i).isVisited) {
+                System.out.println("VISITED NEIGHBOUR: " + neighbours.get(i).x + ", " + neighbours.get(i).y);
+                continue;
+            }
             neighbours.get(i).visit(); visitedCells.add(neighbours.get(i)); currentPosition++; return true;
         }
-
         return false;
     }
 
     public void generateMap() {
         Cell currentCell = output.getRandomCell();
+        System.out.println("CURRENT CELL: " + currentCell.x + ", " + currentCell.y);
         currentCell.visit();
         for (int i = 0; i < (output.noise*output.size*output.size); i++) {
             while (! addNext(currentCell))
@@ -85,21 +93,26 @@ public class Generator {
 
     private void resetCurrentPosition() { currentPosition = visitedCells.size()-1; }
 
-    private Cell getPrevious() { return visitedCells.get(currentPosition--); }
+    private Cell getPrevious() { return visitedCells.get(--currentPosition); }
 
-    public Generator(int size, double noise) {
+    public Generator(int size, double noise, int monsterCount, int personaCount) throws FileNotFoundException {
         output = new Map(size, noise);
         visitedCells = new ArrayList<>();
         currentPosition = 0;
+        this.monsterCount = monsterCount; this.personaCount = personaCount;
     }
 
     public void printMap() {
+        System.setOut(out);
+        System.out.println(new String(new char[output.size+2]).replace('\0', '#'));
         for (Cell[] line : output.cellArray) {
+            System.out.print("#");
             for (Cell cell : line) {
                 if (cell.isVisited) System.out.print("=");
                 else System.out.print("0");
             }
-            System.out.println();
+            System.out.println('#');
         }
+        System.out.println(new String(new char[output.size+2]).replace('\0', '#'));
     }
 }
