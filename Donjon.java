@@ -9,7 +9,7 @@ public class Donjon {
             jeu.tour();
             graphic.repaint();
             
-            if (jeu.terrain.isFinished) { graphic.ecranFinal(jeu.sortis); }
+            if (Terrain.isFinished) { graphic.ecranFinal(jeu.sortis); }
         });
         timer.setInitialDelay(0);
         timer.start();

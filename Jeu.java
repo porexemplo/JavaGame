@@ -37,7 +37,7 @@ public class Jeu {
         Jeu j = new Jeu("laby1.txt");
         j.tour();
         while(!Terrain.isFinished){
-            Thread.sleep(500);
+            Thread.sleep(300);
             j.terrain.print();
             j.tour();
         }

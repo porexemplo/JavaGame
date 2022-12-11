@@ -18,7 +18,7 @@ public class Personnage extends EntiteMobile {
             if (((CaseTraversable) cible).getContenu() instanceof Monstre) {
                 this.resistance--;
 
-                if (((CaseTraversable) courante).getContenu().resistance <= 0){
+                if ((((CaseTraversable) courante).getContenu().resistance <= 0)&&(((CaseTraversable) courante).getContenu() != null)){
                     ((CaseTraversable) courante).vide(); 
                 return;
             }
