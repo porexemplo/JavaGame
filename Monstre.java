@@ -24,10 +24,11 @@ public class Monstre extends EntiteMobile {
                 return;
             }
             if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
+                ((CaseTraversable) cible).getContenu().resistance--;
                 this.resistance--;
-                if (((CaseTraversable) cible).getContenu().resistance <= 0){
-                    ((CaseTraversable) cible).vide();
-                    Terrain.isFinished = true;
+                if (this.resistance <= 0){
+                    ((CaseTraversable) courante).vide();
+                    
                 }
 
                 return;

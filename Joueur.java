@@ -1,6 +1,6 @@
 public class Joueur extends Entite{
     protected Direction dir;
-    public Joueur() { resistance = 5; dir = Direction.nord; }
+    public Joueur() { resistance = 10; dir = Direction.nord; }
 
     @Override
     String toString(String background) { return "H"; }
@@ -12,8 +12,12 @@ public class Joueur extends Entite{
             if (((CaseTraversable) cible).getContenu() instanceof Monstre){
                 this.resistance--;
                 ((CaseTraversable) cible).getContenu().resistance--;
-                if (((CaseTraversable) cible).getContenu().resistance <= 0)
-                    ((CaseTraversable) cible).vide();
+                
+                if (this.resistance <= 0){
+                    ((CaseTraversable) courante).vide();
+                    Terrain.isFinished = true;
+                }
+
             }
 
             else if (((CaseTraversable) cible).getContenu() instanceof Obstacle){
