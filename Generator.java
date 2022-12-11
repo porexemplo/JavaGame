@@ -1,7 +1,9 @@
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -10,7 +12,18 @@ public class Generator {
         protected int x, y;
         protected boolean isVisited;
 
-        public Cell(int x, int y) { this.x = x; this.y = y; isVisited = false; }
+        /* Content description
+        * 0 -> Empty
+        * 1 -> Joueur
+        * 2 -> Personnage
+        * 3 -> Monstre
+        * 4 -> Sortie
+        */
+        int content;
+
+        public Cell(int x, int y) { this.x = x; this.y = y; isVisited = false; content = 0; }
+
+        public void setContent(int content) { this.content = content; }
         public void visit() { isVisited = true; }
     }
 
@@ -54,7 +67,7 @@ public class Generator {
     protected int personaCount, monsterCount;
     PrintStream out = new PrintStream(new FileOutputStream("output.txt"));
 
-    static void shuffleArray(int[] intArray) {
+    static int[] shuffleArray(int[] intArray) {
         Random rnd = ThreadLocalRandom.current();
         for (int i = intArray.length - 1; i > 0; i--) {
             int index = rnd.nextInt(i + 1);
@@ -62,6 +75,7 @@ public class Generator {
             intArray[index] = intArray[i];
             intArray[i] = temp;
         }
+        return intArray;
     }
 
     public boolean addNext(Cell cell) {
@@ -89,6 +103,7 @@ public class Generator {
                 currentCell = getPrevious();
             resetCurrentPosition();
         }
+        setCellsContent();
     }
 
     private void resetCurrentPosition() { currentPosition = visitedCells.size()-1; }
@@ -102,14 +117,40 @@ public class Generator {
         this.monsterCount = monsterCount; this.personaCount = personaCount;
     }
 
+    public void setCellsContent() {
+        int[] indexArray = new int[monsterCount+personaCount+2];
+        for (int i = 0; i < indexArray.length; i++) indexArray[i] = i;
+        shuffleArray(indexArray);
+        int gamerIndex = indexArray[0];
+        int[] monsterIndexArray = Arrays.copyOfRange(indexArray, 1, 1+monsterCount);
+        System.out.println(Arrays.toString(monsterIndexArray));
+        int[] personaIndexArray = Arrays.copyOfRange(indexArray, monsterCount+1, personaCount+monsterCount+1);
+        int sortieIndex = indexArray[monsterCount+personaCount+1];
+        visitedCells.get(gamerIndex).setContent(1);
+        for (int i = 0; i < personaCount; i++)
+            visitedCells.get(personaIndexArray[i]).setContent(2);
+        for (int i = 0; i < monsterCount; i++)
+            visitedCells.get(monsterIndexArray[i]).setContent(3);
+        visitedCells.get(sortieIndex).setContent(4);
+    }
+
     public void printMap() {
-        System.setOut(out);
+        System.setOut(out); Random rnd = new Random();
+        System.out.println((output.size+2) + " " + (output.size+2));
         System.out.println(new String(new char[output.size+2]).replace('\0', '#'));
         for (Cell[] line : output.cellArray) {
             System.out.print("#");
             for (Cell cell : line) {
-                if (cell.isVisited) System.out.print("=");
-                else System.out.print("0");
+                if (cell.isVisited) {
+                    switch (cell.content) {
+                        case 0 -> System.out.print(" ");
+                        case 1 -> System.out.print("H");
+                        case 2 -> System.out.print("m");
+                        case 3 -> System.out.print("<");
+                        case 4 -> System.out.print("o");
+                    }
+                }
+                else System.out.print("#");
             }
             System.out.println('#');
         }
