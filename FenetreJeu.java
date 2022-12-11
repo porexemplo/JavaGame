@@ -21,7 +21,7 @@ public class FenetreJeu<ActionEvent> extends JFrame implements KeyListener {
  
     public void ecranFinal(int n) {
         remove(panel);
-        JLabel label = new JLabel("Score " + n);
+        JLabel label = new JLabel("Score " + n*10);
         setFont(new Font("Verdana", Font.BOLD, 20));
         label.setHorizontalAlignment(SwingConstants.CENTER);
         label.setSize(this.getSize());

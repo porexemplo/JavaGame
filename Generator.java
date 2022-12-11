@@ -116,7 +116,7 @@ public class Generator {
     }
 
     public void setCellsContent() {
-        int[] indexArray = new int[monsterCount+personaCount+2];
+        int[] indexArray = new int[visitedCells.size()];
         for (int i = 0; i < indexArray.length; i++) indexArray[i] = i;
         shuffleArray(indexArray);
         int gamerIndex = indexArray[0];
