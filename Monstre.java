@@ -16,7 +16,7 @@ public class Monstre extends EntiteMobile {
                 return;
             }
             if (((CaseTraversable) cible).getContenu() instanceof Personnage) {
-                this.dir= Direction.random();
+                this.dir = Direction.random();
                 ((CaseTraversable) cible).contenu.resistance--;
                 if (((CaseTraversable) cible).getContenu().resistance <= 0)
                     ((CaseTraversable) cible).vide();
