@@ -34,10 +34,10 @@ public class Jeu {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        Jeu j = new Jeu("laby1.txt");
+        Jeu j = new Jeu("laby2.txt");
         j.tour();
         while(!Terrain.isFinished){
-            Thread.sleep(300);
+            Thread.sleep(200);
             j.terrain.print();
             j.tour();
         }

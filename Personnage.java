@@ -16,12 +16,13 @@ public class Personnage extends EntiteMobile {
          if (cible instanceof CaseTraversable) {
            
             if (((CaseTraversable) cible).getContenu() instanceof Monstre) {
-                this.resistance--;
-
-                if ((((CaseTraversable) courante).getContenu().resistance <= 0)&&(((CaseTraversable) courante).getContenu() != null)){
+                
+                if ((((CaseTraversable) courante).getContenu() != null)&&(((CaseTraversable) courante).getContenu().resistance < 0)){
                     ((CaseTraversable) courante).vide(); 
-                return;
+                
             }
+            this.dir = Direction.random();
+            return;
         }
         if (((CaseTraversable) cible).getContenu() instanceof Joueur) {
             this.dir= Direction.random();
